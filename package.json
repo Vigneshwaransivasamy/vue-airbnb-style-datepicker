@@ -1,12 +1,12 @@
 {
-  "name": "vue-airbnb-style-datepicker",
-  "version": "2.7.0",
-  "description": "A VueJs version of the popular AirBnb datepicker",
+  "name": "customised-vue-airbnb-style-datepicker",
+  "version": "1.0.0",
+  "description": "A CustomisedVueJs version of the popular AirBnb datepicker",
   "main": "dist/vue-airbnb-style-datepicker.cjs.js",
   "module": "dist/vue-airbnb-style-datepicker.es.js",
   "unpkg": "dist/vue-airbnb-style-datepicker.js",
   "repository": {
-    "url": "MikaelEdebro/vue-airbnb-style-datepicker",
+    "url": "Vigneshwaransivasamy/vue-airbnb-style-datepicker",
     "type": "git"
   },
   "files": [
@@ -21,7 +21,7 @@
     "test:watch": "jest --watch",
     "test:debug": "node --inspect --inspect-brk node_modules/jest/bin/jest.js"
   },
-  "author": "MikaelEdebro <mikael.edebro@gmail.com>",
+  "author": "Vigneshwaran Sivasamy <vigneshwaransivasamy@gmail.com>",
   "license": "MIT",
   "devDependencies": {
     "@vue/test-utils": "^1.0.0-beta.12",
@@ -80,6 +80,7 @@
     }
   },
   "dependencies": {
-    "v-click-outside": "^2.0.1"
+    "v-click-outside": "^2.0.1",
+    "yarn": "^1.22.1"
   }
 }
