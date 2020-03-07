@@ -27,7 +27,7 @@
             <svg v-else viewBox="0 0 1000 1000">
               <path
                 d="M336.2 274.5l-210.1 210h805.4c13 0 23 10 23 23s-10 23-23 23H126.1l210.1 210.1c11 11 11 21 0 32-5 5-10 7-16 7s-11-2-16-7l-249.1-249c-11-11-11-21 0-32l249.1-249.1c21-21.1 53 10.9 32 32z"
-              ></path>
+              />
             </svg>
           </button>
         </div>
@@ -37,7 +37,7 @@
             <svg v-else viewBox="0 0 1000 1000">
               <path
                 d="M694.4 242.4l249.1 249.1c11 11 11 21 0 32L694.4 772.7c-5 5-10 7-16 7s-11-2-16-7c-11-11-11-21 0-32l210.1-210.1H67.1c-13 0-23-10-23-23s10-23 23-23h805.4L662.4 274.5c-21-21.1 11-53.1 32-32.1z"
-              ></path>
+              />
             </svg>
           </button>
         </div>
@@ -126,7 +126,7 @@
                     :style="getDayStyles(fullDate)"
                     @mouseover="() => { setHoverDate(fullDate) }"
                   >
-                    <button
+                    <div
                       class="asd__day-button"
                       type="button"
                       v-if="dayNumber"
@@ -134,7 +134,8 @@
                       :date="fullDate"
                       :disabled="isDisabled(fullDate)"
                       @click="() => { selectDate(fullDate) }"
-                    >{{ dayNumber }}</button>
+                      v-html="dayCellContent({fullDate, dayNumber}, index)"
+                    >{{ dayNumber }}</div>
                   </td>
                 </tr>
               </tbody>
@@ -244,6 +245,10 @@ export default {
     showShortcutsMenuTrigger: { type: Boolean, default: true },
     showMonthYearSelect: { type: Boolean, default: false },
     yearsForSelect: { type: Number, default: 10 },
+    dayCellContent: {
+      type: Function,
+      default: ({ fullDate, dayNumber }, index) => dayNumber,
+    },
     isTest: {
       type: Boolean,
       default: () => process.env.NODE_ENV === 'test',
@@ -343,7 +348,7 @@ export default {
       startingDate: '',
       months: [],
       years: [],
-      width: 300,
+      width: 350,
       selectedDate1: '',
       selectedDate2: '',
       isSelectingDate1: true,
@@ -1107,6 +1112,13 @@ $transition-time: 0.3s;
   position: relative;
   overflow: visible;
 }
+.date-day-value {
+  margin-top: 6px;
+  margin-bottom: -5px;
+}
+.date-flight-amount {
+  font-size: 8px;
+}
 
 .asd {
   &__wrapper {
@@ -1300,8 +1312,7 @@ $transition-time: 0.3s;
   }
 
   &__day {
-    $size: 38px;
-    line-height: $size;
+    $size: 50px;
     height: $size;
     padding: 0;
     overflow: hidden;
@@ -1335,7 +1346,7 @@ $transition-time: 0.3s;
   &__day-button {
     background: transparent;
     width: 100%;
-    height: 100%;
+    height: auto;
     border: none;
     cursor: pointer;
     color: inherit;

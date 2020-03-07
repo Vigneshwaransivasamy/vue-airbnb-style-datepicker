@@ -20,6 +20,7 @@
 
           <airbnb-style-datepicker
             :trigger-element-id="'datepicker-input-trigger'"
+            :day-cell-content="handleDates"
             :mode="'range'"
             :date-one="inputDateOne"
             :date-two="inputDateTwo"
@@ -164,6 +165,38 @@ export default {
       alignRight: false,
       showDatepickers: true,
       trigger: false,
+      dummyPriceDate: {
+        '2020-03-12': {
+          type: 'Low',
+          currencyType: 'INR',
+          value: '1244'
+        },
+        '2020-03-13': {
+          type: 'Low',
+          currencyType: 'INR',
+          value: '1262'
+        },
+        '2020-03-14': {
+          type: 'High',
+          currencyType: 'INR',
+          value: '2670'
+        },
+        '2020-03-15': {
+          type: 'Low',
+          currencyType: 'INR',
+          value: '1244'
+        },
+        '2020-03-19': {
+          type: 'Low',
+          currencyType: 'INR',
+          value: '1262'
+        },
+        '2020-03-20': {
+          type: 'High',
+          currencyType: 'INR',
+          value: '2670'
+        }
+      }
     }
   },
   computed: {
@@ -172,10 +205,10 @@ export default {
     },
   },
   created() {
-    setTimeout(() => {
-      this.inputDateOne = '2019-01-12'
-      this.inputDateTwo = ''
-    }, 5000)
+    // setTimeout(() => {
+    //   this.inputDateOne = '2019-01-12'
+    //   this.inputDateTwo = ''
+    // }, 5000)
   },
   methods: {
     formatDates(dateOne, dateTwo) {
@@ -187,6 +220,23 @@ export default {
         formattedDates += ' - ' + format(dateTwo, this.dateFormat)
       }
       return formattedDates
+    },
+    handleDates(
+      {fullDate, dayNumber}, index
+      ) {
+      if(!this.dummyPriceDate[fullDate]) {
+        return dayNumber;
+      }
+
+      const {type, currencyType, value} = this.dummyPriceDate[fullDate];
+      return `
+      <div class="date-wrapper">
+        <div class="date-day-value">${dayNumber}</div>
+        <div class="date-flight-cost ${type}">
+          <span class="currency-symbol-${currencyType}"></span>
+          <span class="date-flight-amount">${value}</span>
+      </div>
+      `
     },
     toggleAlign() {
       this.alignRight = !this.alignRight
